@@ -14,7 +14,7 @@ namespace Barker.Controllers
     {
         private BarkerData db = new BarkerData();
 
-        // GET: Barks
+        // GET: Barks comment
         public ActionResult Index()
         {
             var barks = db.Barks.Include(b => b.AspNetUser);
