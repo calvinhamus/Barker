@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Barker.Data;
+using Microsoft.AspNet.Identity;
 
 namespace Barker.Controllers
 {
@@ -17,8 +18,16 @@ namespace Barker.Controllers
         // GET: Barks comment
         public ActionResult Index()
         {
-            var barks = db.Barks.Include(b => b.AspNetUser);
-            return View(barks.ToList());
+            var user = User.Identity.GetUserName();
+            AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
+            var returnBarks = new List<Bark>();
+            var barks = db.Barks.Where(b => b.UserId.Equals(self.Id));
+
+            var followersBarks = db.UserFollowings.Where(x => x.UserId == self.Id).Select(t=>t.UserFollowed.Barks);
+            returnBarks = followersBarks.SelectMany(c => c).ToList();
+            returnBarks.AddRange(barks);
+       
+            return View(returnBarks);
         }
 
         // GET: Barks/Details/5
@@ -50,12 +59,17 @@ namespace Barker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,UserId,Text,DateTimePosted")] Bark bark)
         {
-            if (ModelState.IsValid)
-            {
+            var user = User.Identity.GetUserName();
+            AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
+           // bark.AspNetUser = self;
+            bark.UserId = self.Id;
+            bark.DateTimePosted = DateTime.Now;
+          //  if (ModelState.IsValid)
+         //   {
                 db.Barks.Add(bark);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+          //  }
 
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", bark.UserId);
             return View(bark);

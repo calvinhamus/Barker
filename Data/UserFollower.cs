@@ -20,8 +20,8 @@ namespace Barker.Data
         [Column(Order = 1)]
         public string FollowerId { get; set; }
 
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser Self { get; set; }
 
-        public virtual AspNetUser AspNetUser1 { get; set; }
+        public virtual AspNetUser Follower { get; set; }
     }
 }

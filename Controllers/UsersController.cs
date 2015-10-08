@@ -98,8 +98,10 @@ namespace Barker.Controllers
                 return HttpNotFound();
             }
             var following = new UserFollowing();
-            following.Self = self;
-            following.UserFollowed = AspNetUser;
+            following.UserId = self.Id;
+            following.FollowingId = AspNetUser.Id;
+            //following.Self = self;
+           // following.UserFollowed = AspNetUser;
             db.Entry(following).State = EntityState.Added;
             db.SaveChanges();
             return RedirectToAction("Index");

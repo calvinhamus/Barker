@@ -52,25 +52,25 @@ namespace Barker.Data
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.UserFollowers)
-                .WithRequired(e => e.AspNetUser)
+                .WithRequired(e => e.Self)
                 .HasForeignKey(e => e.FollowerId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.UserFollowers1)
-                .WithRequired(e => e.AspNetUser1)
+                .WithRequired(e => e.Follower)
                 .HasForeignKey(e => e.UserId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.UserFollowings)
-                .WithRequired(e => e.Self)
+                .WithRequired(e => e.UserFollowed)
                 .HasForeignKey(e => e.FollowingId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.UserFollowings1)
-                .WithRequired(e => e.UserFollowed)
+                .WithRequired(e => e.UserSelf)
                 .HasForeignKey(e => e.UserId)
                 .WillCascadeOnDelete(false);
 
