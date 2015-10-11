@@ -55,7 +55,7 @@ namespace Barker.Controllers
             // following.UserFollowed = AspNetUser;
             db.Entry(following).State = EntityState.Added;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Users");
         }
         public ActionResult Unfollow(string id)
         {
@@ -74,7 +74,7 @@ namespace Barker.Controllers
             var remove = db.UserFollowings.Where(x => x.UserId.Equals(self.Id) && x.FollowingId.Equals(AspNetUser.Id)).FirstOrDefault();
             db.UserFollowings.Remove(remove);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Users");
 
         }
 

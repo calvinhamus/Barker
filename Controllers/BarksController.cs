@@ -132,7 +132,7 @@ namespace Barker.Controllers
                 db.Barks.Add(rebark);
                 db.Entry(bark).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", bark.UserId);
             return View(bark);
@@ -164,7 +164,7 @@ namespace Barker.Controllers
             {
                 db.Entry(bark).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", bark.UserId);
             return View(bark);

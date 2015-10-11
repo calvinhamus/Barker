@@ -1,31 +1,96 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model Barker.Models.ViewModels.HomeVM
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Barker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+        <th>
+            @Html.DisplayNameFor(model => model.Followers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Following)
+        </th>
+
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.ActionLink(Model.UserName, "ViewByUser", "Barks", new { id = Model.UserName }, "")
+
+        </td>
+        <td>
+
+            @Html.ActionLink(Model.Followers.ToString(), "Index", "Followers")
+        </td>
+        <td>
+            @Html.ActionLink(Model.Following.ToString(), "Index", "Following")
+        </td>
+
+    </tr>
+</table>
+<p>
+    @Html.ActionLink("Bark", "Create","Barks","",new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            User Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Text
+        </th>
+
+        <th>
+            Rebarks
+        </th>
+        <th>
+            Date Posted
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Barks)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.AspNetUser.UserName, "ViewByUser", "Barks", new { id = item.AspNetUser.UserName }, "")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Rebarks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimePosted)
+            </td>
+            <td>
+                @if (User.Identity.GetUserName() == item.AspNetUser.UserName)
+                {
+                    @Html.ActionLink("Edit", "Edit", "Barks",  new { id = item.Id },"")
+                }
+
+                @Html.ActionLink("Details", "Details","Barks", new { id = item.Id },"")
+                @Html.ActionLink("ReBark", "Rebark", "Barks",  new { id = item.Id },"")@*| |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+            </td>
+        </tr>
+    }
+
+</table>
