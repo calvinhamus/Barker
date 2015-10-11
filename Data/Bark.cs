@@ -18,6 +18,9 @@ namespace Barker.Data
         [StringLength(128)]
         public string Text { get; set; }
 
+
+        public int Rebarks { get; set; }
+
         public DateTime DateTimePosted { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }

@@ -29,7 +29,7 @@ namespace Barker.Controllers
             returnUsers.AddRange(diffs);
             return View(returnUsers);
         }
-
+       
        // GET: Users/Details/5
         public ActionResult Details(string id)
         {
@@ -82,50 +82,7 @@ namespace Barker.Controllers
             }
             return View(AspNetUser);
         }
-       // TODO update to follow
-        public ActionResult Follow(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = User.Identity.GetUserName();
-            AspNetUser AspNetUser = db.AspNetUsers.Find(id);
-
-            AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
-            if (AspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            var following = new UserFollowing();
-            following.UserId = self.Id;
-            following.FollowingId = AspNetUser.Id;
-            //following.Self = self;
-           // following.UserFollowed = AspNetUser;
-            db.Entry(following).State = EntityState.Added;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        public ActionResult Unfollow(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = User.Identity.GetUserName();
-            AspNetUser AspNetUser = db.AspNetUsers.Find(id);
-
-            AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
-            if (AspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            var remove = db.UserFollowings.Where(x => x.UserId.Equals(self.Id) && x.FollowingId.Equals(AspNetUser.Id)).FirstOrDefault();
-            db.UserFollowings.Remove(remove);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-
-        }
+     
       //  POST: Users/Edit/5
       //   To protect from overposting attacks, please enable the specific properties you want to bind to, for 
        //  more details see http://go.microsoft.com/fwlink/?LinkId=317598.

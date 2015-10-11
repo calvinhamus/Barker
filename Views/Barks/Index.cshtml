@@ -1,44 +1,94 @@
-﻿@model IEnumerable<Barker.Data.Bark>
+﻿@model Barker.Models.ViewModels.HomeVM
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<table class="table">
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.UserName)
+    </th>
+  
+    <th>
+        @Html.DisplayNameFor(model => model.Followers)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Following)
+    </th>
 
+    <th></th>
+</tr>
+
+<tr>
+    <td>
+        @Html.DisplayFor(model => model.UserName)
+
+    </td>
+    <td>
+       
+        @Html.ActionLink(Model.Followers.ToString(), "Index","Followers")
+    </td>
+    <td>
+        @Html.ActionLink(Model.Following.ToString(), "Index","Following")
+    </td>
+
+</tr>
+</table>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            User Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Text)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateTimePosted)
+           Text
+        </th>
+       
+        <th>
+            Rebarks
+        </th>
+        <th>
+            Date Posted
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach(var item in Model.Barks)
+    {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Text)
         </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Rebarks)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateTimePosted)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if(User.Identity.GetUserName() == item.AspNetUser.UserName)
+            {
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            }
+
+        @Html.ActionLink("Details", "Details", new { id = item.Id })
+        @Html.ActionLink("ReBark", "Rebark", new { id = item.Id })@*| |
+        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>
 }

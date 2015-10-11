@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace Barker.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseAuthenticatedController
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","Barks");
+            //return View();
         }
 
         public ActionResult About()

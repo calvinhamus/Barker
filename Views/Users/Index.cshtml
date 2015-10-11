@@ -86,11 +86,11 @@
         <td>
             @if (item.FollowingText == "Follow")
             {
-                @Html.ActionLink(item.FollowingText, "Follow", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink(item.FollowingText, "Follow","Followers", new { id = item.Id }, new { @class = "btn btn-info" })
             }
             else
             {
-                @Html.ActionLink(item.FollowingText, "UnFollow", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink(item.FollowingText, "UnFollow", "Followers", new { id = item.Id }, new { @class = "btn btn-primary" })
             }
 
 

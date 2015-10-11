@@ -77,3 +77,5 @@ E:\Github\Barker\Barker\obj\Debug\Barker.pdb
 E:\Github\Barker\Barker\obj\Debug\Barker.csprojResolveAssemblyReference.cache
 E:\Github\Barker\Barker\obj\Debug\Barker.Migrations.init.resources
 E:\Github\Barker\Barker\obj\Debug\Barker.csproj.GenerateResource.Cache
+E:\Github\Barker\Barker\obj\Debug\Barker.Migrations.rebark.resources
+E:\Github\Barker\Barker\obj\Debug\Barker.Migrations.rebarks.resources
