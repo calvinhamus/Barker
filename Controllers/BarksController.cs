@@ -92,7 +92,7 @@ namespace Barker.Controllers
          //   {
                 db.Barks.Add(bark);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
           //  }
 
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", bark.UserId);

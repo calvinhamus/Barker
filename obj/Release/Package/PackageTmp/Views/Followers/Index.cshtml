@@ -11,7 +11,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserFollowed.UserName)
+            @Html.DisplayNameFor(model => model.UserSelf.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserSelf.Email)
@@ -26,19 +26,19 @@
     <tr>
         <td>
             @*@Html.DisplayFor(modelItem => item.UserFollowed.Email)*@
-            @Html.ActionLink(item.UserFollowed.UserName, "ViewByUser","Barks", new { id = item.UserFollowed.UserName },"")
+            @Html.ActionLink(item.UserSelf.UserName, "ViewByUser","Barks", new { id = item.UserSelf.UserName },"")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserFollowed.Email)
+            @Html.DisplayFor(modelItem => item.UserSelf.Email)
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.Id)
         </td>*@
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        </td>*@
     </tr>
 }
 

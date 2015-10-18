@@ -24,15 +24,7 @@ namespace Barker.Controllers
             return View(userFollowers.ToList());
         }
         
-        //public ActionResult ViewUser(string id)
-        //{
-        //    if(id == null || id == "")
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    AspNetUser user = db.AspNetUsers.Where(x => x.Id == id).FirstOrDefault();
-        //    return RedirectToAction("Index", "Barks");
-        //}
+
         // TODO update to follow
         public ActionResult Follow(string id)
         {
@@ -75,7 +67,6 @@ namespace Barker.Controllers
             db.UserFollowings.Remove(remove);
             db.SaveChanges();
             return RedirectToAction("Index","Users");
-
         }
 
     }

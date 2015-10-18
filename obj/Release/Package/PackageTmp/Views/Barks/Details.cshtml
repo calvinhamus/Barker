@@ -1,4 +1,5 @@
 ﻿@model Barker.Data.Bark
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Details";
@@ -11,6 +12,12 @@
     <h4>Bark</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </dt>
@@ -38,6 +45,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if(Model.AspNetUser.UserName == User.Identity.GetUserName())
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) //|
+    }
+   
     @Html.ActionLink("Back to List", "Index","Home")
 </p>

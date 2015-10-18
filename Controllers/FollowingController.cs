@@ -21,7 +21,6 @@ namespace Barker.Controllers
             var user = User.Identity.GetUserName();
             AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
             var userFollowings = db.UserFollowings.Where(x => x.UserId == self.Id);
-           
             return View(userFollowings.ToList());
         }
         public ActionResult ViewUser(int? id)
