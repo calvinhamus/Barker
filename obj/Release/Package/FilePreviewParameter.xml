@@ -4,10 +4,7 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^E:\\Github\\Barker\\Barker\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^E:\\Github\\Barker\\Barker\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="BarkerData-Web.config Connection String" description="" value="server=br-cdbr-azure-south-a.cloudapp.net;user id=bfed0a7a824d84;password=b602796e;database=Barker;persistsecurityinfo=True" tags="">
+  <parameter name="BarkerData-Web.config Connection String" description="" value="Data Source=cs597webdevdb.czovholt5fwn.us-west-2.rds.amazonaws.com:1433;          Initial Catalog=Barker;          user id=CS597WebDev;password=#AllYourBase1985;App=EntityFramework" tags="">
     <parameterEntry kind="XmlFile" scope="E:\\Github\\Barker\\Barker\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BarkerData']/@connectionString" />
-  </parameter>
-  <parameter name="DefaultConnection-Web.config Connection String" description="" value="server=br-cdbr-azure-south-a.cloudapp.net;user id=bfed0a7a824d84;password=b602796e;database=Barker;persistsecurityinfo=True" tags="">
-    <parameterEntry kind="XmlFile" scope="E:\\Github\\Barker\\Barker\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>

@@ -21,7 +21,8 @@ namespace Barker.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("BarkerData", throwIfV1Schema: false)
+        // "DefaultConnection"
         {
         }
 

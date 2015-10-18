@@ -41,6 +41,7 @@
             @Html.DisplayNameFor(model => model.AccessFailedCount)
         </th>*@
         <th>
+            
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th></th>
@@ -49,7 +50,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.ActionLink(item.UserName, "ViewByUser", "Barks", new { id = item.UserName }, "")
+            @*@Html.DisplayFor(modelItem => item.Email)*@
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.EmailConfirmed)

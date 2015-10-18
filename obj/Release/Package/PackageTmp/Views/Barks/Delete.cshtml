@@ -1,4 +1,4 @@
-﻿@model Barker.Core.Data.tweet
+﻿@model Barker.Data.Bark
 
 @{
     ViewBag.Title = "Delete";
@@ -9,31 +9,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>tweet</h4>
+    <h4>Bark</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.aspnetuser.Email)
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.aspnetuser.Email)
+            @Html.DisplayFor(model => model.AspNetUser.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.text)
+            @Html.DisplayNameFor(model => model.Text)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.text)
+            @Html.DisplayFor(model => model.Text)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.DateTimePosted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.date)
+            @Html.DisplayFor(model => model.DateTimePosted)
         </dd>
 
     </dl>

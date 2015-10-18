@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Barker.Data.UserFollowing>
+
+@{
+    ViewBag.Title = "Followers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Followers</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserFollowed.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserSelf.Email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.UserFollowed.Email)*@
+            @Html.ActionLink(item.UserFollowed.UserName, "ViewByUser","Barks", new { id = item.UserFollowed.UserName },"")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserFollowed.Email)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

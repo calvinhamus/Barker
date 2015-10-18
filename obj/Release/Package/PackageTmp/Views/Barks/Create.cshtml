@@ -1,4 +1,4 @@
-﻿@model Barker.Core.Data.tweet
+﻿@model Barker.Data.Bark
 
 @{
     ViewBag.Title = "Create";
@@ -13,36 +13,36 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>tweet</h4>
+        <h4>Bark</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.userId, "userId", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("userId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.userId, "", new { @class = "text-danger" })
+                @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.text, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.text, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.text, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
             </div>
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateTimePosted, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DateTimePosted, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateTimePosted, "", new { @class = "text-danger" })
             </div>
         </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Send Bark" class="btn btn-default" />
             </div>
         </div>
     </div>

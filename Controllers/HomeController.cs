@@ -18,23 +18,29 @@ namespace Barker.Controllers
             var vm = new HomeVM();
             var user = User.Identity.GetUserName();
             AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
-            var returnBarks = new List<Bark>();
-            var barks = db.Barks.Where(b => b.UserId.Equals(self.Id));
+            if(self != null)
+            {
+                var returnBarks = new List<Bark>();
+                var barks = db.Barks.Where(b => b.UserId.Equals(self.Id));
 
-            var followersBarks = db.UserFollowings.Where(x => x.UserId == self.Id).Select(t => t.UserFollowed.Barks);
-            returnBarks = followersBarks.SelectMany(c => c).ToList();
-            returnBarks.AddRange(barks);
+                var followersBarks = db.UserFollowings.Where(x => x.UserId == self.Id).Select(t => t.UserFollowed.Barks);
+                returnBarks = followersBarks.SelectMany(c => c).ToList();
+                returnBarks.AddRange(barks);
 
-            vm.Barks = returnBarks.ToList();
-            vm.Followers = db.UserFollowings.Where(x => x.FollowingId == self.Id).Count();
-            vm.Following = db.UserFollowings.Where(x => x.UserId == self.Id).Count();
-            vm.UserName = self.UserName;
+                vm.Barks = returnBarks.ToList();
+                vm.Followers = db.UserFollowings.Where(x => x.FollowingId == self.Id).Count();
+                vm.Following = db.UserFollowings.Where(x => x.UserId == self.Id).Count();
+                vm.UserName = self.UserName;
+
+                return View("Index", vm);
+            }
+
+
+            return RedirectToAction("Login", "Account");
 
 
 
-            return View("Index", vm);
 
-          
             //return View();
         }
 

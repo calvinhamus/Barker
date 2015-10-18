@@ -1,15 +1,13 @@
-﻿@model IEnumerable<Barker.Data.aspnetuser>
+﻿@model IEnumerable<Barker.Data.AspNetUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Users</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -43,6 +41,7 @@
             @Html.DisplayNameFor(model => model.AccessFailedCount)
         </th>*@
         <th>
+            
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th></th>
@@ -51,7 +50,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.ActionLink(item.UserName, "ViewByUser", "Barks", new { id = item.UserName }, "")
+            @*@Html.DisplayFor(modelItem => item.Email)*@
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.EmailConfirmed)
@@ -86,11 +86,11 @@
         <td>
             @if (item.FollowingText == "Follow")
             {
-                @Html.ActionLink(item.FollowingText, "Follow", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink(item.FollowingText, "Follow","Followers", new { id = item.Id }, new { @class = "btn btn-info" })
             }
             else
             {
-                @Html.ActionLink(item.FollowingText, "UnFollow", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink(item.FollowingText, "UnFollow", "Followers", new { id = item.Id }, new { @class = "btn btn-primary" })
             }
 
 
