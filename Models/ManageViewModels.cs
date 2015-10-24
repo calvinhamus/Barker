@@ -9,6 +9,7 @@ namespace Barker.Models
     {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
+        public string Username { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
@@ -56,6 +57,18 @@ namespace Barker.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+    public class ChangeUserNameViewModel
+    {
+        
+        [Display(Name ="Current Username")]
+        public string OldUsername { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [DataType(DataType.Text)]
+        [Display(Name = "New Username")]
+        public string NewUsername { get; set; }
     }
 
     public class AddPhoneNumberViewModel

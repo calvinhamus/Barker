@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Barker.Models;
+using Barker.Data;
 
 namespace Barker.Controllers
 {
@@ -70,10 +71,20 @@ namespace Barker.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Username = GetUserName(userId)
             };
             return View(model);
         }
+
+        private string GetUserName(string userId)
+        {
+            var db = new BarkerData();
+            AspNetUser AspNetUser = db.AspNetUsers.Find(userId);
+
+            return AspNetUser.UserName;
+        }
+
 
         //
         // POST: /Manage/RemoveLogin
@@ -295,6 +306,44 @@ namespace Barker.Controllers
                 CurrentLogins = userLogins,
                 OtherLogins = otherLogins
             });
+        }
+
+        //
+        // GET: /Manage/ChangePassword
+        public ActionResult ChangeUserName()
+        {
+            var db = new BarkerData();
+            var self = User.Identity.GetUserId();
+            AspNetUser AspNetUser = db.AspNetUsers.Find(self);
+            var vm = new ChangeUserNameViewModel();
+            vm.OldUsername = AspNetUser.UserName;
+
+            return View(vm);
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUserName(ChangeUserNameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var db = new BarkerData();
+            var self = User.Identity.GetUserId();
+            AspNetUser AspNetUser = db.AspNetUsers.Find(self);
+           
+            if (AspNetUser != null)
+            {
+
+                AspNetUser.UserName = model.NewUsername;
+                db.SaveChanges();
+                return RedirectToAction("Index", new { Message = "Username has been changed." });
+            }
+           // AddErrors(result);
+            return View(model);
         }
 
         //

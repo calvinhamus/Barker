@@ -309,6 +309,7 @@
     <Content Include="Views\Following\Edit.cshtml" />
     <Content Include="Views\Following\Index.cshtml" />
     <Content Include="Views\Barks\ViewByUser.cshtml" />
+    <Content Include="Views\Manage\ChangeUsername.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
