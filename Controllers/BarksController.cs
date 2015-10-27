@@ -122,15 +122,15 @@ namespace Barker.Controllers
             var user = User.Identity.GetUserName();
             AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
             AspNetUser originalUser = db.AspNetUsers.Where(x => x.Id.Equals(bark.UserId)).FirstOrDefault();
+            Bark originalBark = db.Barks.Find(bark.Id);
+            originalBark.Rebarks = originalBark.Rebarks + 1;
             if (ModelState.IsValid)
             {
                 var rebark = new Bark();
                 rebark.UserId = self.Id;
                 rebark.DateTimePosted = DateTime.Now;
                 rebark.Text = "Rebark from " + originalUser.UserName + " " + bark.Text;
-                bark.Rebarks += 1;
                 db.Barks.Add(rebark);
-                db.Entry(bark).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index","Home");
             }

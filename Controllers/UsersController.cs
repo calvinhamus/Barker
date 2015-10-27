@@ -21,11 +21,12 @@ namespace Barker.Controllers
             var user = User.Identity.GetUserName();
             AspNetUser self = db.AspNetUsers.Where(x => x.UserName.Equals(user)).FirstOrDefault();
             var following = db.UserFollowings.Where(y => y.UserId.Equals(self.Id)).Select(x => x.UserFollowed).ToList();
-            following.ForEach(f => f.FollowingText = "Following");
+            following.ForEach(f => f.FollowingText = "Unfollow");
             var returnUsers = new List<AspNetUser>();
             returnUsers.AddRange(following);
             var diffs = db.AspNetUsers.ToList().Except(following).ToList();
             diffs.ForEach(f => f.FollowingText = "Follow");
+            diffs.Remove(self);
             returnUsers.AddRange(diffs);
             return View(returnUsers);
         }

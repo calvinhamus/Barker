@@ -84,6 +84,7 @@
                 @if (User.Identity.GetUserName() == item.AspNetUser.UserName)
                 {
                     @Html.ActionLink("Edit", "Edit", "Barks",  new { id = item.Id },"")
+                    @Html.ActionLink(" Delete", "Delete","Barks", new { id = item.Id },"")
                 }
 
                 @Html.ActionLink("Details", "Details","Barks", new { id = item.Id },"")
